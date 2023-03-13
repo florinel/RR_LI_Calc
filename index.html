@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- METAS -->
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- MODIFY -->
+  <meta name="title" content="CMG Residual Risk Calculator" />
+  <meta name="description" content="CMG Residual Risk Calculator" />
+  <link rel="shortcut icon" href="img/favicon.ico" />
+  <title>CMG Residual Risk Calculator v2023</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    .mask-custom {
+      backdrop-filter: contrast(140%) brightness(100%) saturate(100%) sepia(50%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
+      mix-blend-mode: lighten;
+      background: rgba(161, 44, 199, 0.31);
+      opacity: 1;
+    }
+
+    .highlight {
+      background-color: yellow;
+      border-color: black;
+    }
+  </style>
+
+</head>
+
+<!-- MAIN -->
+
+<body class="vh-100" style="background-image: url('img/1123456.jpg'); background-size: cover;">
+  <div class="mask mask-custom"></div>
+  <main class="text-white">
+    <h1>Control Management & Governance (CMG)</h1>
+    <h1>Residual Risk Calculator</h1>
+
+    </section>
+
+    <!-- FIRST -->
+    <div class="row">
+      <!-- CONFIDENTIALITY AND INTEGRITY -->
+      <section>
+        <h5 class="border-bottom" title="Confidentiality and Integrity">Confidentiality and Integrity</h5>
+        <div class="row">
+          <div class="h6 nomargin col-8 d-flex align-items-left" title="RBAC policy or MFA rule present?">RBAC policy
+            or MFA rule present?</div>
+          <div class="col-4">
+            <select class="form-control" aria-label=".form-select-sm example" id="ci1" name="ci1"
+              onchange="calculate()">
+              <option value="0">Yes</option>
+              <option value="1">No</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="h6 nomargin col-8 d-flex align-items-left"
+            title="Is approved encryption policy (TLS 1.2 or higher) applied to resource?">Encryption policy
+            applied to resource?</div>
+          <div class="col-4">
+            <select class="form-control" aria-label=".form-select-sm example" id="ci2" name="ci2"
+              onchange="calculate()">
+              <option value="0">Yes</option>
+              <option value="1">No</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- TECHNICAL IMPACT -->
+      <section>
+        <h5 class="border-bottom" title="Technical Impact">Technical Impact</h5>
+        <div class="row">
+          <div class="h6 nomargin col-8 d-flex align-items-right" title="Resource accessible from the Internet?">
+            Resource accessible from the Internet?</div>
+          <div class="col-4">
+            <select class="form-control" aria-label=".form-select-sm example" id="ti1" name="ti1"
+              onchange="calculate()">
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="h6 nomargin col-8 d-flex align-items-right"
+            title="Resource is in Prod, Non-Prod or Sandbox environment?">Resource environment</div>
+          <div class="col-4">
+            <select class="form-control" aria-label=".form-select-sm example" id="ti2" name="ti2"
+              onchange="calculate()">
+              <option value="1">Production</option>
+              <option value="0">Non-Production</option>
+              <option value="0">Sandbox</option>
+            </select>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SECOND -->
+    <div class="row">
+      <!-- VULNERABILITY FACTORS -->
+      <section>
+        <h5 class="border-bottom" title="Vulnerability Factors">Vulnerability Factors</h5>
+        <div class="row">
+          <div class="h6 nomargin col-8 d-flex align-items-left" title="Resource is in Private / Public network?">
+            Resource is in Private / Public network?</div>
+          <div class="col-4">
+            <select class="form-control" aria-label=".form-select-sm example" id="vf1" name="vf1"
+              onchange="calculate()">
+              <option value="1">Public</option>
+              <option value="0">Private</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="h6 nomargin col-8 d-flex align-items-left"
+            title="Compensating controls like DDoS protection or Firewall rule present?">Compensating controls
+            present?</div>
+          <div class="col-4">
+            <select class="form-control" aria-label=".form-select-sm example" id="vf2" name="vf2"
+              onchange="calculate()">
+              <option value="0">Yes</option>
+              <option value="1">No</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="h6 nomargin col-8 d-flex align-items-left"
+            title="Resource is in Prod, Non-Prod or Sandbox environment?">Resource environment</div>
+          <div class="col-4">
+            <select class="form-control" aria-label=".form-select-sm example" id="vf3" name="vf3"
+              onchange="calculate()">
+              <option value="1">Production</option>
+              <option value="0">Non-Production</option>
+              <option value="0">Sandbox</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- BUSINESS IMPACT -->
+      <section>
+        <h5 class="border-bottom" title="Business Impact">Business Impact</h5>
+        <div class="row">
+          <div class="h6 nomargin col-8 d-flex align-items-right"
+            title="If resource is compromised, what is the estimated downtime?">Estimated downtime</div>
+          <div class="col-4">
+            <select class="form-control" aria-label=".form-select-sm example" id="bi1" name="bi1"
+              onchange="calculate()">
+              <option value="1">Outage</option>
+              <option value="1">Failover</option>
+              <option value="0">None</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="h6 nomargin col-8 d-flex align-items-right"
+            title="What is the business impact if resource is compromised/unavailable and exceeds the Recovery Time Objective (RTO)?">
+            Impact if RTO exceeded</div>
+          <div class="col-4">
+            <select class="form-control" aria-label=".form-select-sm example" id="bi2" name="bi2"
+              onchange="calculate()">
+              <option value="0">Insignificant</option>
+              <option value="0">Minimal</option>
+              <option value="1">Moderate</option>
+              <option value="1">Critical</option>
+              <option value="1">Catastrophic</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="h6 nomargin col-8 d-flex align-items-right"
+            title="Does resource contain Personally Identifiable Information (PII) or Personal Health Information (PHI) data?">
+            Does resource contain PII or PHI data?
+          </div>
+          <div class="col-4">
+            <select class="form-control" aria-label=".form-select-sm example" id="bi3" name="bi3"
+              onchange="calculate()">
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- THIRD -->
+    <div class="row">
+      <!-- LIKELIHOOD SCORE -->
+      <section>
+        <div class="col-12">
+          <h5 class="border-bottom">
+            <center>Likelihood Score</center>
+          </h5>
+          <h4 class="LS"> </h4>
+        </div>
+      </section>
+
+      <!-- IMPACT SCORE -->
+      <section>
+        <div class="col-12">
+          <h5 class="border-bottom">
+            <center>Impact Score</center>
+          </h5>
+          <h4 class="IS"> </h4>
+        </div>
+      </section>
+
+    </div>
+
+    <hr>
+    <div class="col-12">
+      <strong>
+        <h5 class="border-bottom">
+          <center>Residual Risk</center>
+        </h5>
+        <h4 class="RS"> </h4>
+      </strong>
+    </div>
+
+    <section>
+      <div class="container">
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Likelihood * Impact</h5>
+            <p class="card-text">
+
+              <hr>
+
+            <div class="row">
+              <div class="col-md-2">
+                &nbsp;
+              </div>
+              <div class="col-10">
+                <strong>Impact</strong>
+              </div>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-md-2">
+                <strong>Likelihood</strong>
+              </div>
+              <div class="col-md-2 impactInfo">
+                Info
+              </div>
+              <div class="col-md-2 impactLow">
+                Low
+              </div>
+              <div class="col-md-2 impactMedium">
+                Medium
+              </div>
+              <div class="col-md-2 impactHigh">
+                High
+              </div>
+              <div class="col-md-2 impactVeryHigh">
+                Very High
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 likelihoodInfo">
+                Info
+              </div>
+              <div class="col-md-2 classInfo">
+                Info
+              </div>
+              <div class="col-md-2 classInfo">
+                Info
+              </div>
+              <div class="col-md-2 classLow">
+                Low
+              </div>
+              <div class="col-md-2 classMedium">
+                Medium
+              </div>
+              <div class="col-md-2 classHigh">
+                High
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 likelihoodLow">
+                Low
+              </div>
+              <div class="col-md-2 classInfo">
+                Info
+              </div>
+              <div class="col-md-2 classLow">
+                Low
+              </div>
+              <div class="col-md-2 classLow">
+                Low
+              </div>
+              <div class="col-md-2 classMedium">
+                Medium
+              </div>
+              <div class="col-md-2 classHigh">
+                High
+              </div>
+
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 likelihoodMedium">
+                Medium
+              </div>
+              <div class="col-md-2 classLow">
+                Low
+              </div>
+              <div class="col-md-2 classMedium">
+                Medium
+              </div>
+              <div class="col-md-2 classMedium">
+                Medium
+              </div>
+              <div class="col-md-2 classHigh">
+                High
+              </div>
+              <div class="col-md-2 classHigh">
+                High
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 likelihoodHigh">
+                High
+              </div>
+              <div class="col-md-2 classMedium">
+                Medium
+              </div>
+              <div class="col-md-2 classMedium">
+                Medium
+              </div>
+              <div class="col-md-2 classHigh">
+                High
+              </div>
+              <div class="col-md-2 classHigh">
+                High
+              </div>
+              <div class="col-md-2 classVeryHigh">
+                Very High
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 likelihoodVeryHigh">
+                Very High
+              </div>
+              <div class="col-md-2 classHigh">
+                High
+              </div>
+              <div class="col-md-2 classHigh">
+                High
+              </div>
+              <div class="col-md-2 classHigh">
+                High 9
+              </div>
+              <div class="col-md-2 classVeryHigh">
+                Very High 16
+              </div>
+              <div class="col-md-2 classVeryHigh">
+                Very High (20-25)
+              </div>
+            </div>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <hr>
+
+    <!-- CREDITS -->
+    <section>
+      <div class="footer">
+        2023 CMG Residual Risk Calculator
+      </div>
+    </section>
+  </main>
+
+
+  <!-- SCRIPTS -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/sweetalert.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>
