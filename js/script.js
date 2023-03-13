@@ -139,22 +139,24 @@ function getCriticaly(L, I) {
   //INFO
   if (L == "LOW" && I == "INFO") return 'INFO';
   if (L == "INFO" && I == "LOW") return 'INFO';
+  if (L == "INFO" && I == "MEDIUM") return 'INFO';
+  if (L == "MEDIUM" && I == "INFO") return 'INFO';
+  if (L == "INFO" && I == "HIGH") return 'INFO';
+  if (L == "HIGH" && I == "INFO") return 'INFO';
+  if (L == "INFO" && I == "VERY HIGH") return 'INFO';
+  if (L == "VERY HIGH" && I == "INFO") return 'INFO';
 
   //LOW
   if (L == "LOW" && I == "LOW") return 'LOW';
   if (L == "LOW" && I == "MEDIUM") return 'LOW';
   if (L == "MEDIUM" && I == "LOW") return 'LOW';
-  if (L == "INFO" && I == "MEDIUM") return 'LOW';
-  if (L == "MEDIUM" && I == "INFO") return 'LOW';
+
 
   //MEDIUM
   if (L == "LOW" && I == "HIGH") return 'MEDIUM';
   if (L == "MEDIUM" && I == "MEDIUM") return 'MEDIUM';
   if (L == "HIGH" && I == "LOW") return 'MEDIUM';
-  if (L == "INFO" && I == "HIGH") return 'MEDIUM';
-  if (L == "HIGH" && I == "INFO") return 'MEDIUM';
-  if (L == "INFO" && I == "VERY HIGH") return 'MEDIUM';
-  if (L == "VERY HIGH" && I == "INFO") return 'MEDIUM';
+
 
 
   //HIGH
