@@ -25,11 +25,7 @@ function calculate() {
     + $("#vf1").val() +
     + $("#vf2").val() +
     + $("#vf3").val() + 0;
-  dataset.push($("#ci1").val());
-  dataset.push($("#ci2").val());
-  dataset.push($("#vf1").val());
-  dataset.push($("#vf2").val());
-  dataset.push($("#vf3").val());
+
 
   // Get values TECHNICAL IMPACT (TI) )and BUSINESS IMPACT (BI))
   IS = + $("#ti1").val() +
@@ -37,11 +33,7 @@ function calculate() {
     + $("#bi1").val() +
     + $("#bi2").val() +
     + $("#bi3").val() + 0;
-  dataset.push($("#ti1").val());
-  dataset.push($("#ti2").val());
-  dataset.push($("#bi1").val());
-  dataset.push($("#bi2").val());
-  dataset.push($("#bi3").val());
+
 
   //var LS = (LS / 5).toFixed(3);
   //var IS = (IS / 5).toFixed(3);
@@ -60,11 +52,6 @@ function calculate() {
 
   score = LS * IS;
   console.log("score is " + score);
-
-
-
-
-
 
 
   if (getRisk(LS) == "INFO") {
